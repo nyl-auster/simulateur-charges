@@ -1,0 +1,4 @@
+Okc\TnsBundle\Model\calculsChargesEntreprise:
+    properties:
+        caHt:
+            - NotBlank: ~

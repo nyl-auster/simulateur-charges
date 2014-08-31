@@ -1,0 +1,37 @@
+{% extends "OkcTnsBundle::baseFoundation.html.twig" %}
+
+{% block body %}
+
+    {% for flashMessage in app.session.flashbag.get('notice') %}
+        <div class="flash-message">
+            <em>Notice</em>: {{ flashMessage }}
+        </div>
+    {% endfor %}
+
+    <div class="row">
+        <div class="small-12 columns">
+            <h1 class="text-center">{% block title %} {% endblock %} </h1>
+        </div>
+    </div>
+    <br/>
+
+    <div class="row">
+        <div class="small-12 columns">
+           {% block content_header %}{% endblock %}
+        </div>
+    </div>
+
+    <div class="row">
+    <div class="small-12 columns">
+        {% block content %}{% endblock %}
+    </div>
+    </div>
+
+    {% if code is defined %}
+        <h2>Code behind this page</h2>
+        <div class="block">
+            <div class="symfony-content">{{ code|raw }}</div>
+        </div>
+    {% endif %}
+
+{% endblock %}

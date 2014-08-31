@@ -1,0 +1,2 @@
+_tns:
+    resource: "@OkcTnsBundle/Resources/config/routing.yml"

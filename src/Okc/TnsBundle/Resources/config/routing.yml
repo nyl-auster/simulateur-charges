@@ -1,0 +1,3 @@
+_eurl:
+    resource: "@OkcTnsBundle/Controller/SimulateurController.php"
+    type:     annotation

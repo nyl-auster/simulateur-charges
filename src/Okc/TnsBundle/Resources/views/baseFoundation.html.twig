@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<!--[if IE 9]>
+<html class="lt-ie10" lang="en" >
+<![endif]--> <html class="no-js" lang="en" >
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block pagetitle %}{% endblock %}
+    <link rel="stylesheet" href="/bundles/okctns/css/app.css">
+    <script src="/bundles/okctns/bower_components/foundation/js/vendor/modernizr.js"></script>
+    <title>{% block title %}Welcome!{% endblock %}</title>
+    {% block stylesheets %}{% endblock %}
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+</head>
+<body>
+
+{% block body %}{% endblock %}
+
+
+{% block javascripts %}{% endblock %}
+<script src="/bundles/okctns/bower_components/foundation/js/vendor/jquery.js"></script>
+<script src="/bundles/okctns/bower_components/foundation/js/foundation.min.js"></script>
+<script> $(document).foundation(); </script>
+
+</body>
+</html>

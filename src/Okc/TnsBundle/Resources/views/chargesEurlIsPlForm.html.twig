@@ -1,0 +1,103 @@
+
+<form class="hide-for-print" action="" method="GET">
+
+
+    <div class="row">
+
+        <div class="small-12 large-2 columns">
+            <label class="{% if form.errors['caHt'] is defined %}error{% endif %}">
+                Chiffre d'affaire HT <br/><br/>
+                <input type="text" name="caHt" value="{{form.fields['caHt']}}">
+            </label>
+            {% if form.errors['caHt'] is defined %}
+                <small class="error">{#<?php echo(implode('<br />', $form->errors['caHt'])}} #}</small>
+            {% endif %}
+        </div>
+
+        <div class="small-12 large-2 columns">
+            <label class="{% if form.errors['salaire'] is defined %}error{% endif %}">
+                Rémunération <br/><br/>
+                <input type="text" name="salaire" value="{{form.fields['salaire']}}">
+            </label>
+            {% if form.errors['salaire'] is defined %}
+                <small class="error">{#<?php echo(implode('<br />', $form->errors['salaire'])}}#}</small>
+            {% endif %}
+        </div>
+
+        <div class="small-12 large-2 columns">
+            <label class="{% if form.errors['frais'] is defined %}error{% endif %}">
+                Frais <br/><br/>
+                <input type="text" name="frais" value="{{form.fields['frais']}}">
+            </label>
+            {% if form.errors['frais'] is defined %}
+                <small class="error">{#<?php echo(implode('<br />', $form->errors['frais'])}}#}</small>
+            {% endif %}
+        </div>
+
+        <div class="small-12 large-2 columns">
+            <label class="{% if form.errors['cfe'] is defined %}error{% endif %}">
+                CFE (selon votre commune)
+                <input type="text" name="cfe" value="{{form.fields['cfe']}}">
+            </label>
+            {% if form.errors['cfe'] is defined %}
+                <small class="error">{#<?php echo(implode('<br />', $form->errors['cfe'])}}#}</small>
+            {% endif %}
+        </div>
+
+        <div class="small-12 large-2 columns">
+            <label class="{% if form.errors['cotisationsSocialesDejaVerseesEnN'] is defined %}error{% endif %}">
+                Cotisation sociales déjà versées en N
+                <input type="text" name="cotisationsSocialesDejaVerseesEnN" value="{{form.fields['cotisationsSocialesDejaVerseesEnN']}}">
+            </label>
+            {% if form.errors['cotisationsSocialesDejaVerseesEnN'] is defined %}
+                <small class="error">{#<?php echo(implode('<br />', $form->errors['cotisationsSocialesDejaVerseesEnN'])}} #}</small>
+            {% endif %}
+        </div>
+
+        <div class="row">
+            <div class="small-12 large-2 columns">
+                <label> Première année
+                    <input type="radio" {% if form.fields['cotisationRegime'] == 'annee_1' %} checked="checked" {% endif %} name="cotisationRegime" value="annee_1">
+                </label>
+
+                <label>Deuxieme année
+                    <input type="radio" {% if form.fields['cotisationRegime'] == 'annee_2' %} checked="checked" {% endif %} name="cotisationRegime" value="annee_2">
+                </label>
+
+                <label>Regime etabli
+                    <input type="radio" {% if form.fields['cotisationRegime'] == 'regime_etabli' %} checked="checked" {% endif %} name="cotisationRegime" value="regime_etabli">
+                </label>
+
+                {%  if form.errors['cotisationRegime'] is defined %}
+                <small class="error">{# <?php echo(implode('<br />', $form->errors['cotisationRegime'])}} #} </small>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="row advanced">
+
+
+        </div>
+
+
+        <div class="row">
+            <div class="small-12 large-12 columns text-center">
+                <br/>
+                <input class="button radius primary" type="submit" value="CALCULER" name="submitted">
+            </div>
+        </div>
+
+    </div><!-- /.row -->
+
+    <!--
+        <label>
+        <span data-tooltip class="has-tip" title="Indiquez ici les acomptes de TVA déjà versée au titre de l'année N. N'incluez pas les régularisations de l'année N concernant N-1 ou antérieurs.">
+             TVA prévisionnelle déjà versée en N
+          </span>
+          <input type="text" name="tvaDejaVerseePourN" value="<?php //echo($tvaDejaVerseePourN}}">
+        </label>
+        -->
+
+
+
+</form>

@@ -1,0 +1,446 @@
+{% extends "OkcTnsBundle::layout.html.twig" %}
+
+ {% block content_header %}
+    {%  include 'OkcTnsBundle::chargesForm.html.twig' %}
+
+ {% endblock %}
+
+{% block content %}
+
+    {%   if calculs.totalCharges > calculs.caHt %}
+        <h2 class="text-center"> Déficit :
+        <strong style="color:red"> {{ calculs.totalCharges - calculs.caHt }} €</strong>
+    {% else %}
+        <h2 class="text-center"> Bénéfice :
+            <strong style="color:green">{{ calculs.totalCharges - calculs.caHt }} €< € </strong></h2>
+    {% endif %}
+
+    <h3> Récapitulatif de vos charges <div style="float:right"> <a class="tiny button secondary radius" href="javascript:window.print()">Imprimer</a> </div></h3>
+
+    <table>
+        <thead>
+        <tr>
+            <th>
+                Poste
+            </th>
+            <th>
+                Montant
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+
+        <tr>
+            <td>
+                Rémunération
+            </td>
+            <td>
+                {{ calculs.salaire }}
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                Cotisations sociales
+            </td>
+            <td>
+                {{ calculs.totalCotisationsSociales }}
+                <ul>
+
+                    {% for value in calculs.getTotalCotisationsSocialesParOrganismes %}
+                        <li> {{ value['label'] }} {{ value['total'] }} </li>
+                    {% endfor %}
+
+                </ul>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                Impot sur la société
+            </td>
+            <td>
+                {{ calculs.is['total'] }}
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                Frais
+            </td>
+            <td>
+                {#  calculs.frais #}
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                CFE
+            </td>
+            <td>
+                {# calculs.cfe #}
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <strong>Total</strong>
+            </td>
+            <td>
+                <strong> {{ calculs.totalCharges}} </strong>
+            </td>
+        </tr>
+
+        </tbody>
+    </table>
+
+    <h3> Détails des calculs </h3>
+    <table>
+    <thead>
+    <tr>
+        <th>
+            Nom
+        </th>
+        <th>
+            Organisme
+        <th>
+            Base calcul
+        </th>
+        <th>
+            Taux
+        </th>
+        <th>
+            Montant
+        </th>
+
+    </tr>
+    </thead>
+    <tbody>
+
+
+    <tr>
+        <td>
+            Allocation familiales
+        </td>
+        <td>
+            {{ calculs.getOrganisme('allocationsFamiliales')['label'] }}
+        </td>
+        <td>
+           {{calculs.baseCalculCotisationsSociales}}
+        </td>
+        <td>
+            {{ datas['allocationsFamiliales']['tranches'][0]['taux'] }}
+        </td>
+        <td>
+           {{calculs.allocationsFamiliales['total']}}
+        </td>
+    </tr>
+
+    <tr>
+        <td>
+            Formation professionnelle
+        </td>
+        <td>
+            {{ calculs.getOrganisme('formationProfessionnelle')['label'] }}
+        </td>
+        <td>
+           {{calculs.formationProfessionnelle['tranches'][0]['baseCalcul']}}
+        </td>
+        <td>
+           {{calculs.formationProfessionnelle['tranches'][0]['taux']}}
+        </td>
+        <td>
+           {{calculs.formationProfessionnelle['total']}}
+        </td>
+    </tr>
+
+    <tr>
+        <td>
+            Maladie maternité
+        </td>
+        <td>
+            <?php print $calculs.getOrganisme('maladieMaternite')['label'] ?>
+        </td>
+        <td>
+           {{calculs.baseCalculCotisationsSociales}}
+        </td>
+        <td>
+            <?php echo($datas['maladieMaternite']['tranches'][0]['taux']) ?>
+        </td>
+        <td>
+           {{calculs.maladieMaternite['total']}}
+        </td>
+    </tr>
+
+
+
+    {# // si premiere année, pas de tranche mais un forfait #}
+    {% if(calculs.assuranceVieillesseBase['tranches']) is defined %}
+    <tr>
+        <td>
+            Assurance vieillesse base tranche 1
+        </td>
+        <td>
+            <?php print $calculs.getOrganisme('assuranceVieillesseBase')['label'] ?>
+        </td>
+        <td>
+           {{calculs.assuranceVieillesseBase['tranches'][0]['baseCalcul'] }}
+        </td>
+        <td>
+           {{calculs.assuranceVieillesseBase['tranches'][0]['taux'] }}
+        </td>
+        <td>
+           {{calculs.assuranceVieillesseBase['tranches'][0]['cotisation'] }}
+        </td>
+    </tr>
+
+    <tr>
+        <td>
+            Assurance vieillesse base tranche 2 - <?php print $calculs.getOrganisme('assuranceVieillesseBase')['label'] ?>
+        </td>
+        <td>
+            <?php print $calculs.getOrganisme('assuranceVieillesseBase')['label'] ?>
+        </td>
+        <td>
+           {{calculs.assuranceVieillesseBase['tranches'][1]['baseCalcul']}}
+        </td>
+        <td>
+           {{calculs.assuranceVieillesseBase['tranches'][1]['taux']}}
+        </td>
+        <td>
+           {{calculs.assuranceVieillesseBase['tranches'][1]['cotisation']}}
+        </td>
+    </tr>
+
+    {% endif %}
+
+    <tr>
+        <td>
+            Assurance vieillesse base Total
+        </td>
+        <td>
+            <?php print $calculs.getOrganisme('assuranceVieillesseBase')['label'] ?>
+        </td>
+        <td></td>
+        <td></td>
+
+        <td>
+           {{calculs.assuranceVieillesseBase['total']}}
+        </td>
+    </tr>
+
+    <tr>
+        <td>
+            Assurance vieillesse Complémentaire
+        </td>
+        <td>
+            <?php print $calculs.getOrganisme('assuranceVieillesseComplementaire')['label'] ?>
+        </td>
+        <td>
+           {{calculs.baseCalculCotisationsSociales}}
+        </td>
+        <td>
+            tranche <?php echo($calculs.assuranceVieillesseComplementaire['trancheActive']['nom']) ?>
+        </td>
+        <td>
+           {{calculs.assuranceVieillesseComplementaire['total']}}
+
+        </td>
+    </tr>
+
+    <tr>
+        <td>
+            Invalidité décés
+        </td>
+        <td>
+            <?php print $calculs.getOrganisme('invaliditeDeces')['label'] ?>
+        </td>
+        <td>
+           {{calculs.baseCalculCotisationsSociales}}
+        </td>
+        <td>
+            classe <?php echo(strtoupper($calculs.classeInvaliditeDeces)) ?>
+        </td>
+        <td>
+           {{calculs.invaliditeDeces['total']}}
+
+        </td>
+    </tr>
+
+
+    <tr>
+      <td>
+        <strong>Total cotisations hors CGS / CRDS</strong>
+      </td>
+      <td>
+
+      </td>
+      <td>
+      </td>
+      <td></td>
+      <td>
+        <strong>{{ calculs.totalCotisationsSocialesHorsCsg }}</strong>
+      </td>
+    </tr>
+
+
+
+
+    <tr>
+        <td>
+            CSG Déductible
+        </td>
+        <td>
+            {{calculs.getOrganisme('csgDeductible')['label'] }}
+        </td>
+        <td>
+           {{calculs.baseCalculCsgCrds}}
+        </td>
+        <td>
+           {{calculs.csgDeductible['tranches'][0]['taux']}}
+        </td>
+        <td>
+           {{calculs.csgDeductible['total']}}
+
+        </td>
+    </tr>
+
+    <tr>
+        <td>
+            CSG - Non déductible
+        </td>
+        <td>
+            {{calculs.getOrganisme('csgNonDeductible')['label'] }}
+        </td>
+        <td>
+           {{calculs.baseCalculCsgCrds}}
+        </td>
+        <td>
+           {{calculs.csgNonDeductible['tranches'][0]['taux']}}
+        </td>
+        <td>
+           {{calculs.csgNonDeductible['total']}}
+
+        </td>
+    </tr>
+
+    <tr>
+        <td>
+            CRDS - Non déductible
+        </td>
+        <td>
+            {{ calculs.getOrganisme('crds')['label'] }}
+        </td>
+        <td>
+           {{calculs.baseCalculCsgCrds}}
+        </td>
+        <td>
+           {{calculs.crds['tranches'][0]['taux']}}
+        </td>
+        <td>
+           {{calculs.crds['total']}}
+
+        </td>
+    </tr>
+
+    <tr>
+        <td>
+            CGS / CRDS
+        </td>
+        <td>
+            {{  calculs.getOrganisme('csgDeductible')['label'] }}
+        </td>
+        <td>
+
+        </td>
+        <td></td>
+        <td>
+           {{calculs.csgCrds}}
+
+        </td>
+    </tr>
+
+    <tr>
+        <td>
+            <strong>TOTAL COTISATIONS SOCIALES (avec CSG / CRDS) </strong>
+        </td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>
+            <strong>{{calculs.totalCotisationsSociales}}</strong>
+        </td>
+    </tr>
+
+
+    <tr>
+      <td>
+        Pourcentage cotisations par rapport à la rémunération :
+      </td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td>
+        {% if (calculs.salaire > 0) %}
+          {{ (calculs.totalCotisationsSociales * 100) / calculs.salaire }}
+        {% endif %}
+      </td>
+    </tr>
+
+    <tr>
+
+
+    <td>
+        IMPOT SUR LA SOCIETE Tranche 1
+    </td>
+    <td></td>
+    <td>
+       {{calculs.is['tranches'][0]['baseCalcul']}}
+    </td>
+    <td>
+       {{calculs.is['tranches'][0]['taux']}}
+    </td>
+    <td>
+       {{calculs.is['tranches'][0]['cotisation']}}
+    </td>
+    </tr>
+
+    <tr>
+
+        <td>
+            IMPOT SUR LA SOCIETE Tranche 2
+        </td>
+        <td></td>
+        <td>
+           {{calculs.is['tranches'][1]['baseCalcul']}}
+        </td>
+        <td>
+           {{calculs.is['tranches'][1]['taux']}}
+        </td>
+        <td>
+           {{calculs.is['tranches'][1]['cotisation']}}
+        </td>
+    </tr>
+
+    <tr>
+
+        <td>
+            <strong> TOTAL IS  </strong>
+        </td>
+        <td></td>
+        <td>
+            {{ calculs.baseCalculIs }}
+        </td>
+        <td>
+
+        </td>
+        <td>
+            <strong>{{calculs.is['total']}}</strong>
+        </td>
+    </tr>
+
+    </tbody>
+
+    </table>
+
+{% endblock %}
