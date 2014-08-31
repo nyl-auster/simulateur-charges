@@ -25,11 +25,9 @@ class SimulateurController extends Controller
     {
         $datas = include '../src/Okc/TnsBundle/Resources/config/baremesEurlIsPl2014.php';
         $calculs = new calculsChargesEurlIsPl($datas, $request->query->get('charges'));
-
-        $validator = $this->get('validator');
-        $errors = $validator->validate($calculs);
-
         $form = $this->createForm(new ChargesType(), $calculs, ['method' => 'GET']);
+        $form->handleRequest($request);
+        $form->isValid();
         return $this->render('OkcTnsBundle::charges.html.twig',
           [
             'calculs' => $calculs,

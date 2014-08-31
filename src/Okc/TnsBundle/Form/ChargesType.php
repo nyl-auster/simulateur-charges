@@ -10,7 +10,7 @@ class ChargesType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-          ->add('caHt', 'text')
+          ->add('caHt', 'text', ['error_bubbling' => TRUE])
           ->add('salaire', 'text')
           ->add('frais', 'text')
           ->add('cfe', 'text')
