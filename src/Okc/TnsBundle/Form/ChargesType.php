@@ -25,7 +25,7 @@ class ChargesType extends AbstractType
                 'regime_etabli' => 'Régime établi'
               ]
             ])
-          ->add('save', 'submit');
+          ->add('Calculer', 'submit', ['attr' => ['class' => 'radius']]);
     }
 
     public function getName()
