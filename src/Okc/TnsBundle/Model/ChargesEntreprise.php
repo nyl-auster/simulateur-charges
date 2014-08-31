@@ -4,24 +4,24 @@
  */
 namespace Okc\TnsBundle\Model;
 
-abstract class calculsChargesEntreprise {
+abstract class ChargesEntreprise {
 
     // Chiffre d'affaire hors taxe
-    protected $caHt = 0;
+    public $caHt = 0;
 
     // Cotisation foncière
-    protected $cfe = 0;
+    public $cfe = 0;
     // cotisations sociales déjà versée lors de l'année N
-    protected $cotisationsSocialesDejaVerseesEnN = 0;
+    public $cotisationsSocialesDejaVerseesEnN = 0;
 
     // Frais de la société, hors taxe.
-    protected $frais = 0;
+    public $frais = 0;
 
     // indique si l'entreprise est en année 1, année 2 ou régime
     // établi. En un année 1 et 2, les cotisations sociales prévisionnelles
     // sont calculées sur une base forfaitaires.
     // on reste en régime établi (?) par défaut pour les calculs.
-    protected $cotisationRegime = 'regime_etabli';
+    public $cotisationRegime = 'regime_etabli';
 
     // taux et baremes pour les calculs
     protected $datas = [];

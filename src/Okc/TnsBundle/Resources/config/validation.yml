@@ -1,6 +1,22 @@
-Okc\TnsBundle\Model\calculsChargesEntreprise:
+Okc\TnsBundle\Model\ChargesEurlIsPl:
     properties:
         caHt:
+            - Type:
+                type: numeric
+                message: La valeur {{ value }} n'est pas un type {{ type }} valide.
+        salaire:
+            - Type:
+                type: numeric
+                message: La valeur {{ value }} n'est pas un type {{ type }} valide.
+        frais:
+            - Type:
+                type: numeric
+                message: La valeur {{ value }} n'est pas un type {{ type }} valide.
+        cfe:
+            - Type:
+                type: numeric
+                message: La valeur {{ value }} n'est pas un type {{ type }} valide.
+        cotisationsSocialesDejaVerseesEnN:
             - Type:
                 type: numeric
                 message: La valeur {{ value }} n'est pas un type {{ type }} valide.

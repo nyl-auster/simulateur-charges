@@ -2,13 +2,12 @@
 namespace Okc\TnsBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Response;
+
 use Symfony\Component\HttpFoundation\Request;
-// these import the "@Route" and "@Template" annotations
+// these import the "@Route"
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Okc\TnsBundle\Form\ChargesType;
-use Okc\TnsBundle\Model\calculsChargesEurlIsPl;
-use Okc\tnsBundle\Resources\forms\eurlIsPlForm;
+use Okc\TnsBundle\Model\ChargesEurlIsPl;
 
 /**
  * @TODO : rendre le controller testable (injecter charges, le déclarer en tant que service ?)
@@ -24,11 +23,11 @@ class SimulateurController extends Controller
     public function simulateurAction(Request $request)
     {
         $datas = include '../src/Okc/TnsBundle/Resources/config/baremesEurlIsPl2014.php';
-        $calculs = new calculsChargesEurlIsPl($datas, $request->query->get('charges'));
+        $calculs = new ChargesEurlIsPl($datas);
         $form = $this->createForm(new ChargesType(), $calculs, ['method' => 'GET']);
         $form->handleRequest($request);
         $form->isValid();
-        return $this->render('OkcTnsBundle::charges.html.twig',
+        return $this->render('OkcTnsBundle::chargesDetails.html.twig',
           [
             'calculs' => $calculs,
             'datas' => $datas,

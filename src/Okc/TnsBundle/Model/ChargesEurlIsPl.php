@@ -1,24 +1,26 @@
 <?php
 namespace Okc\TnsBundle\Model;
 
-class calculsChargesEurlIsPl extends calculsChargesEntreprise
+class ChargesEurlIsPl extends ChargesEntreprise
 {
 
     // On protege les variables et on les rend accessibles uniquement par getter
     // pour éviter qu'une erreur dans la vue (assignation involontaire à une propriété publique)
     // ne modifie les résultats affichés à l'utilisateur.
-    protected $salaire = 0;
+    public $salaire = 0;
 
     //protected $totalCotisationsSocialesHorsCsg = 0;
 
     // données de syntheses des calculs :
     // @TODO laisser changer la classe invalidité
-    protected $classeInvaliditeDeces = 'a';
+    public $classeInvaliditeDeces = 'a';
 
     function getSalaire()
     {
         return $this->salaire;
     }
+
+
 
     /**
      * Calcul de la base de calcul pour les cotisations sociales
