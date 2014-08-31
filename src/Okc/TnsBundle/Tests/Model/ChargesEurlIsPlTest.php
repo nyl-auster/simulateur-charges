@@ -26,8 +26,8 @@ class ChargesEurlIsPlTest extends \PHPUnit_Framework_TestCase
         ];
         $class = new ChargesEurlIsPl($datas);
         $result = $class->calculTranchesParTaux($datas['is'], $somme);
-
-
+        $this->assertEquals(round($expected_tranche_1), round($result['tranches'][0]['cotisation']));
+        $this->assertEquals(round($expected_tranche_2), round($result['tranches'][1]['cotisation']));
         $this->assertEquals(round($expected_total_charge), round($result['total']));
     }
 
