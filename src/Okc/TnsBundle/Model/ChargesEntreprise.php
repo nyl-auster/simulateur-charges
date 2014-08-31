@@ -4,7 +4,7 @@
  */
 namespace Okc\TnsBundle\Model;
 
-abstract class ChargesEntreprise {
+class ChargesEntreprise {
 
     // Chiffre d'affaire hors taxe
     public $caHt = 0;
@@ -31,7 +31,7 @@ abstract class ChargesEntreprise {
      * @param $datas
      * @param array $variables
      */
-    function __construct($datas, $variables = [])
+    function __construct($datas = [], $variables = [])
     {
         $this->datas = $datas;
         if (!empty($variables))
