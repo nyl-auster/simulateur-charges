@@ -1,0 +1,19 @@
+{% macro table_row(label, montant, baseCalcul, taux, organisme) %}
+    <tr>
+        <td>
+            {{ label }}
+        </td>
+        <td>
+            {{ organisme }}
+        </td>
+        <td>
+            {{ baseCalcul }}
+        </td>
+        <td>
+            {{ taux }}
+        </td>
+        <td>
+            {{ montant }}
+        </td>
+    </tr>
+{% endmacro %}

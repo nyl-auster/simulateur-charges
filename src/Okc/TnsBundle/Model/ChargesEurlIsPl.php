@@ -4,9 +4,6 @@ namespace Okc\TnsBundle\Model;
 class ChargesEurlIsPl extends ChargesEntreprise
 {
 
-    // On protege les variables et on les rend accessibles uniquement par getter
-    // pour éviter qu'une erreur dans la vue (assignation involontaire à une propriété publique)
-    // ne modifie les résultats affichés à l'utilisateur.
     public $salaire = 0;
 
     //protected $totalCotisationsSocialesHorsCsg = 0;
