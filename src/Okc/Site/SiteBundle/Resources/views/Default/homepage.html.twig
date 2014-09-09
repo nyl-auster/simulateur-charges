@@ -1,0 +1,25 @@
+{% extends "OkcTnsBundle::layout.html.twig" %}
+
+{% block content %}
+    <div>
+
+
+        <h2 class="text-center">
+            RESTEZ SEREINS : ANTICIPEZ VOS CHARGES !
+        </h2>
+        <div class="panel text-center">
+            Le système fiscal français obscur et alambiqué met souvent en grave difficulté les nouvelles entreprises qui ont beaucoup de mal à anticiper les charges réellement
+            dues, particulièrement les premières années d’activité.
+            Evitez les mauvaises surprises et maitriser parfaitement votre entreprise individuelle grâce à notre simulateur !
+        </div>
+
+
+        <h4 class="text-center">Simuler vos charges pour une EURL à l'impot sur la société, profession libérals, gérant majoritaire : </h4>
+        <br />
+        <div class="text-center">
+            <a class="button round radius" href="{{ path('_eurl_is_pl') }} ">
+                CALCULER VOS CHARGES
+            </a>
+        </div>
+    </div>
+{% endblock %}

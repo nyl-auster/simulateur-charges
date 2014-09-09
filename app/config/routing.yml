@@ -1,2 +1,6 @@
+okc_site_site:
+    resource: "@OkcSiteSiteBundle/Resources/config/routing.yml"
+    prefix:   /
+
 _tns:
     resource: "@OkcTnsBundle/Resources/config/routing.yml"
