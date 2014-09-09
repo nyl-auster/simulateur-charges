@@ -7,8 +7,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {% block pagetitle %}{% endblock %}
-    <link rel="stylesheet" href="/bundles/okctns/css/app.css">
-    <script src="/bundles/okctns/bower_components/foundation/js/vendor/modernizr.js"></script>
+
+    {% stylesheets 'bundles/okctns/css/app.css' filter='cssrewrite' %}
+    <link rel="stylesheet" href="{{ asset_url }}" />
+    {% endstylesheets %}
+
     <title>{% block title %}Welcome!{% endblock %}</title>
     {% block stylesheets %}{% endblock %}
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
@@ -17,10 +20,14 @@
 
 {% block body %}{% endblock %}
 
+{% javascripts
+'bundles/okctns/bower_components/foundation/js/vendor/jquery.js'
+'bundles/okctns/bower_components/foundation/js/foundation.min.js'
+'bundles/okctns/bower_components/foundation/js/vendor/modernizr.js'
+%}
+<script type="text/javascript" src="{{ asset_url }}"></script>
+{% endjavascripts %}
 
-{% block javascripts %}{% endblock %}
-<script src="/bundles/okctns/bower_components/foundation/js/vendor/jquery.js"></script>
-<script src="/bundles/okctns/bower_components/foundation/js/foundation.min.js"></script>
 <script> $(document).foundation(); </script>
 
 </body>
