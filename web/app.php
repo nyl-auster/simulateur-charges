@@ -28,6 +28,7 @@ $response = $kernel->handle($request);
 $response->send();
 $kernel->terminate($request, $response);
 
+/*
 $time_end = microtime(TRUE);
 $time = $time_end - $time_start;
 print '<div>';
@@ -37,3 +38,4 @@ print '<hr>';
 $memory_usage = memory_get_usage();
 print round($memory_usage/1048576,2) . 'Mo';
 print '</div>';
+*/
