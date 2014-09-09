@@ -1,0 +1,2 @@
+imports:
+    - { resource: "@OkcTnsBundle/Resources/config/services.yml"}

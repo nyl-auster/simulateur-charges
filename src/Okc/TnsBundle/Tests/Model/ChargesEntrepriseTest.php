@@ -8,11 +8,13 @@ class ChargesEntrepriseTest extends \PHPUnit_Framework_TestCase
 
     protected $simulateur;
 
-    function setup() {
+    function setup()
+    {
         $this->simulateur = new ChargesEntreprise();
     }
 
-    function testCalculTranchesParTaux() {
+    function testCalculTranchesParTaux()
+    {
         $somme = 40000;
         $expected_tranche_1 = 5718;
         $expected_tranche_2 = 626.604;
@@ -36,7 +38,8 @@ class ChargesEntrepriseTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(round($expected_total_charge), round($result['total']));
     }
 
-    function testCalculTranchesParForfait() {
+    function testCalculTranchesParForfait()
+    {
         $datas = [
           'label' => 'Retraite complémentaire',
           'tranches' => [

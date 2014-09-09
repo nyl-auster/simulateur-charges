@@ -1,0 +1,5 @@
+services:
+    okc.twig.okc_extension:
+        class: Okc\TnsBundle\Twig\OkcExtension
+        tags:
+            - { name: twig.extension }

@@ -10,10 +10,10 @@
 
     {%   if calculs.totalCharges > calculs.caHt %}
         <h2 class="text-center"> Déficit :
-        <strong style="color:red"> {{ calculs.totalCharges - calculs.caHt }} €</strong>
+        <strong style="color:red"> {{(calculs.caHt - calculs.totalCharges) | euros }} </strong>
     {% else %}
         <h2 class="text-center"> Bénéfice :
-            <strong style="color:green">{{ calculs.totalCharges - calculs.caHt }} €< € </strong></h2>
+            <strong style="color:green">{{ (calculs.caHt - calculs.totalCharges) | euros }} </strong></h2>
     {% endif %}
 
     <h3> Récapitulatif de vos charges <div style="float:right"> <a class="tiny button secondary radius" href="javascript:window.print()">Imprimer</a> </div></h3>
@@ -36,7 +36,7 @@
                 Rémunération
             </td>
             <td>
-                {{ calculs.salaire }}
+                {{ calculs.salaire | euros }}
             </td>
         </tr>
 
@@ -45,11 +45,11 @@
                 Cotisations sociales
             </td>
             <td>
-                {{ calculs.totalCotisationsSociales }}
+                {{ calculs.totalCotisationsSociales | euros }}
                 <ul>
 
                     {% for value in calculs.getTotalCotisationsSocialesParOrganismes %}
-                        <li> {{ value.label }} {{ value.total }} </li>
+                        <li> {{ value.label }} {{ value.total | euros }} </li>
                     {% endfor %}
 
                 </ul>
@@ -61,7 +61,7 @@
                 Impot sur la société
             </td>
             <td>
-                {{ calculs.is.total}}
+                {{ calculs.is.total | euros}}
             </td>
         </tr>
 
@@ -70,7 +70,7 @@
                 Frais
             </td>
             <td>
-                {{  calculs.frais }}
+                {{  calculs.frais | euros }}
             </td>
         </tr>
 
@@ -79,7 +79,7 @@
                 CFE
             </td>
             <td>
-                {{ calculs.cfe }}
+                {{ calculs.cfe | euros }}
             </td>
         </tr>
 
@@ -88,7 +88,7 @@
                 <strong>Total</strong>
             </td>
             <td>
-                <strong> {{ calculs.totalCharges}} </strong>
+                <strong> {{ calculs.totalCharges | euros}} </strong>
             </td>
         </tr>
 
@@ -120,7 +120,7 @@
 
     {{ macros.table_row(
     'Allocations Familiales',
-    calculs.allocationsFamiliales.total,
+    calculs.allocationsFamiliales.total | euros,
     calculs.baseCalculCotisationsSociales,
     datas.allocationsFamiliales.tranches.0.taux,
     calculs.getOrganisme('allocationsFamiliales').label
@@ -128,7 +128,7 @@
 
     {{ macros.table_row(
     'Formation professionnelle',
-    calculs.formationProfessionnelle.total,
+    calculs.formationProfessionnelle.total | euros,
     calculs.formationProfessionnelle.tranches.0.baseCalcul,
     calculs.formationProfessionnelle.tranches.0.taux,
     calculs.getOrganisme('formationProfessionnelle').label
@@ -136,7 +136,7 @@
 
     {{ macros.table_row(
     'Maladie maternité',
-    calculs.maladieMaternite.total,
+    calculs.maladieMaternite.total | euros,
     calculs.maladieMaternite.tranches.0.baseCalcul,
     calculs.maladieMaternite.tranches.0.taux,
     calculs.getOrganisme('maladieMaternite').label
@@ -148,7 +148,7 @@
 
         {{ macros.table_row(
         'Assurance vieillesse base tranche 1',
-        calculs.assuranceVieillesseBase.tranches.0.cotisation,
+        calculs.assuranceVieillesseBase.tranches.0.cotisation | euros,
         calculs.assuranceVieillesseBase.tranches.0.baseCalcul,
         calculs.assuranceVieillesseBase.tranches.0.taux,
         calculs.getOrganisme('assuranceVieillesseBase').label
@@ -156,7 +156,7 @@
 
         {{ macros.table_row(
         'Assurance vieillesse base tranche 2',
-        calculs.assuranceVieillesseBase.tranches.1.cotisation,
+        calculs.assuranceVieillesseBase.tranches.1.cotisation | euros,
         calculs.assuranceVieillesseBase.tranches.1.baseCalcul,
         calculs.assuranceVieillesseBase.tranches.1.taux,
         calculs.getOrganisme('assuranceVieillesseBase').label
@@ -167,7 +167,7 @@
 
     {{ macros.table_row(
     'Assurance vieillesse base total',
-    calculs.assuranceVieillesseBase.total,
+    calculs.assuranceVieillesseBase.total | euros,
     ' voir tranches ',
     ' voir tranches ',
     calculs.getOrganisme('assuranceVieillesseBase').label
@@ -175,7 +175,7 @@
 
     {{ macros.table_row(
     'Assurance vieillesse complémentaire',
-    calculs.assuranceVieillesseComplementaire.total,
+    calculs.assuranceVieillesseComplementaire.total | euros,
     calculs.baseCalculCotisationsSociales,
     'tranche ' ~ calculs.assuranceVieillesseComplementaire.trancheActive.nom,
     calculs.getOrganisme('assuranceVieillesseComplementaire').label
@@ -183,7 +183,7 @@
 
     {{ macros.table_row(
     'Invalidité décès',
-    calculs.invaliditeDeces.total,
+    calculs.invaliditeDeces.total | euros,
     calculs.baseCalculCotisationsSociales,
     'classe ' ~  calculs.classeInvaliditeDeces,
     calculs.getOrganisme('invaliditeDeces').label
@@ -191,12 +191,12 @@
 
     {{ macros.table_row(
     'Total cotisation hors CSG / CRDS',
-    calculs.totalCotisationsSocialesHorsCsg
+    calculs.totalCotisationsSocialesHorsCsg | euros
     )}}
 
     {{ macros.table_row(
     'CSG Déductible',
-    calculs.csgDeductible.total,
+    calculs.csgDeductible.total | euros,
     calculs.baseCalculCsgCrds,
     calculs.csgDeductible.tranches.0.taux,
     calculs.getOrganisme('csgDeductible').label
@@ -205,7 +205,7 @@
 
     {{ macros.table_row(
     'CSG Non Déductible',
-    calculs.csgNonDeductible.total,
+    calculs.csgNonDeductible.total | euros,
     calculs.baseCalculCsgCrds,
     calculs.csgNonDeductible.tranches.0.taux,
     calculs.getOrganisme('csgNonDeductible').label
@@ -213,7 +213,7 @@
 
     {{ macros.table_row(
     'CRDS Non Déductible',
-    calculs.crds.total,
+    calculs.crds.total | euros,
     calculs.baseCalculCsgCrds,
     calculs.crds.tranches.0.taux,
     calculs.getOrganisme('crds').label
@@ -221,7 +221,7 @@
 
     {{ macros.table_row(
     'CSG / CRDS',
-    calculs.csgCrds,
+    calculs.csgCrds | euros,
     '',
     '',
     calculs.getOrganisme('csgDeductible').label
@@ -229,7 +229,7 @@
 
     {{ macros.table_row(
     'TOTAL COTISATIONS SOCIALES AVEC CSG / CRDS',
-    calculs.totalCotisationsSociales,
+    calculs.totalCotisationsSociales | euros,
     '',
     ''
     )}}
@@ -244,7 +244,7 @@
         <td></td>
         <td>
             {% if (calculs.salaire > 0) %}
-                {{ (calculs.totalCotisationsSociales * 100) / calculs.salaire }}
+                {{ (calculs.totalCotisationsSociales * 100) / calculs.salaire  }}
             {% endif %}
         </td>
     </tr>
@@ -252,14 +252,14 @@
 
     {{ macros.table_row(
     'Impot sur la société tranche 1',
-    calculs.is.tranches.0.cotisation,
+    calculs.is.tranches.0.cotisation | euros,
     calculs.is.tranches.0.baseCalcul,
     calculs.is.tranches.0.taux
     )}}
 
     {{ macros.table_row(
     'Impot sur la société tranche 2',
-    calculs.is.tranches.1.cotisation,
+    calculs.is.tranches.1.cotisation | euros,
     calculs.is.tranches.1.baseCalcul,
     calculs.is.tranches.1.taux
     )}}
@@ -267,7 +267,7 @@
 
     {{ macros.table_row(
     'Total Is',
-    calculs.is.total
+    calculs.is.total | euros
     )}}
 
     </tbody>
