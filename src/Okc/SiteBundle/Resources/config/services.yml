@@ -1,7 +1,7 @@
 parameters:
-#    okc_site_site.example.class: Okc\Site\SiteBundle\Example
+#    okc_site.example.class: Okc\SiteBundle\Example
 
 services:
 #    okc_site_site.example:
-#        class: %okc_site_site.example.class%
+#        class: %okc_site.example.class%
 #        arguments: [@service_id, "plain_value", %parameter%]

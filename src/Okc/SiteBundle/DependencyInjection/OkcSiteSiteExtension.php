@@ -1,6 +1,6 @@
 <?php
 
-namespace Okc\Site\SiteBundle\DependencyInjection;
+namespace Okc\SiteBundle\DependencyInjection;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;

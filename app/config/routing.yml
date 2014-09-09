@@ -3,7 +3,7 @@ okc_user:
     prefix:   /
 
 okc_site_site:
-    resource: "@OkcSiteSiteBundle/Resources/config/routing.yml"
+    resource: "@OkcSiteBundle/Resources/config/routing.yml"
     prefix:   /
 
 _tns:

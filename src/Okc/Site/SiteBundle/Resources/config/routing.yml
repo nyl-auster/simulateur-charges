@@ -1,3 +1,0 @@
-okc_site_site_homepage:
-    path:     /
-    defaults: { _controller: OkcSiteSiteBundle:Default:index }
