@@ -1,3 +1,7 @@
+okc_user:
+    resource: "@OkcUserBundle/Resources/config/routing.yml"
+    prefix:   /
+
 okc_site_site:
     resource: "@OkcSiteSiteBundle/Resources/config/routing.yml"
     prefix:   /
