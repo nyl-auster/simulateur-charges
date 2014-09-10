@@ -20,6 +20,7 @@ class AppKernel extends Kernel
       new Okc\SiteBundle\OkcSiteBundle(),
       new Okc\UserBundle\OkcUserBundle(),
       new FOS\UserBundle\FOSUserBundle(),
+            new Okc\BlogBundle\OkcBlogBundle(),
     );
 
     if (in_array($this->getEnvironment(), array('dev', 'test'))) {
@@ -35,4 +36,12 @@ class AppKernel extends Kernel
   {
     $loader->load(__DIR__.'/config/config_'.$this->getEnvironment().'.yml');
   }
+
+  public function registerBundleDirs()
+  {
+    return array(
+            'Bundle\\FOS'     => __DIR__.'/../src/Bundle/FOS',
+        );
+    }
+
 }

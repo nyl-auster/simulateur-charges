@@ -1,12 +1,6 @@
-{% extends "OkcTnsBundle::baseFoundation.html.twig" %}
+{% extends "OkcSiteBundle::baseFoundation.html.twig" %}
 
 {% block body %}
-
-    {% for flashMessage in app.session.flashbag.get('notice') %}
-        <div class="flash-message">
-            <em>Notice</em>: {{ flashMessage }}
-        </div>
-    {% endfor %}
 
     <div class="row">
         <div class="small-12 columns">

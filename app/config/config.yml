@@ -35,7 +35,7 @@ twig:
 assetic:
     debug:          "%kernel.debug%"
     use_controller: false
-    bundles:        ['OkcTnsBundle' ]
+    bundles:        ['OkcTnsBundle', 'OkcSiteBundle']
     #java: /usr/bin/java
     filters:
         cssrewrite: ~

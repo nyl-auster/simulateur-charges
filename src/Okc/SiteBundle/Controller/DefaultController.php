@@ -3,13 +3,17 @@
 namespace Okc\SiteBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Request;
+use FOS\UserBundle\Form\Type\RegistrationFormType;
 
 class DefaultController extends Controller
 {
     public function indexAction()
     {
-      $response = $this->render('OkcSiteBundle:Default:homepage.html.twig');
+      $response = $this->render('OkcSiteBundle::homepage.html.twig');
+      $user = $this->getUser();
+      //print $user->getUsername();
+      //exit;
+      // $form = $this->createForm(new RegistrationFormType($user));
       $response->setETag(md5($response->getContent()));
       $response->setPublic(); // permet de s'assurer que la réponse est publique, et qu'elle peut donc être cachée
       return $response;
