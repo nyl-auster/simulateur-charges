@@ -1,12 +1,8 @@
-okc_blog:
-    resource: "@OkcBlogBundle/Resources/config/routing.yml"
-    prefix:   /
-
 okc_user:
     resource: "@OkcUserBundle/Resources/config/routing.yml"
     prefix:   /
 
-okc_site_site:
+okc_site:
     resource: "@OkcSiteBundle/Resources/config/routing.yml"
     prefix:   /
 

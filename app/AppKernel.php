@@ -20,7 +20,6 @@ class AppKernel extends Kernel
       new Okc\SiteBundle\OkcSiteBundle(),
       new Okc\UserBundle\OkcUserBundle(),
       new FOS\UserBundle\FOSUserBundle(),
-            new Okc\BlogBundle\OkcBlogBundle(),
     );
 
     if (in_array($this->getEnvironment(), array('dev', 'test'))) {

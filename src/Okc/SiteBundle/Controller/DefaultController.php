@@ -11,9 +11,6 @@ class DefaultController extends Controller
     {
       $response = $this->render('OkcSiteBundle::homepage.html.twig');
       $user = $this->getUser();
-      //print $user->getUsername();
-      //exit;
-      // $form = $this->createForm(new RegistrationFormType($user));
       $response->setETag(md5($response->getContent()));
       $response->setPublic(); // permet de s'assurer que la réponse est publique, et qu'elle peut donc être cachée
       return $response;
