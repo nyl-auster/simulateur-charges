@@ -30,8 +30,8 @@ class SimulateurController extends Controller
         return $this->render('OkcTnsBundle::chargesDetails.html.twig',
           [
             'calculs' => $calculs,
-            'datas' => $datas,
-            'form' => $form->createView()
+            'datas'   => $datas,
+            'form'    => $form->createView()
           ]
         );
     }
