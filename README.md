@@ -16,6 +16,7 @@ chgrp -R _www app/logs
 chmod -R g+w app/cache
 chmod -R g+w app/logs
 ```
+Ne pas hésiter à supprimer complètement cache/* et logs/* en cas de souci persistent.
 
 UTILISATION
 ------------
