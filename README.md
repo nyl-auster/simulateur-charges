@@ -1,14 +1,21 @@
 CALCULETTE TNS
 ========================
 
-Calcule les charges d'un travailleur non salarié profession libéral pour une EURL à l'impot sur la société.
+Calcule les charges d'un travailleur non salarié en profession libérale pour une EURL à l'impot sur la société.
 Basée sur symfony 2
 
 DEPLOIEMENT
 -----------
 
-Composer install
-Si il y a une fatal error concernant le cache, supprimer l'intérieur du dossier app/cache manuellement.
+1 - composer install à la racine
+2 - Donner les droits d'écriture à apache sur les dossiers logs et cache :
+
+```
+chgrp -R _www app/cache
+chgrp -R _www app/logs
+chmod -R g+w app/cache
+chmod -R g+w app/logs
+```
 
 UTILISATION
 ------------
