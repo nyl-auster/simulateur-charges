@@ -9,8 +9,6 @@ class ChargesEntreprise {
     // Chiffre d'affaire hors taxe
     public $caHt = 0;
 
-    public $tva = 0;
-
     // Cotisation foncière
     public $cfe = 0;
     // cotisations sociales déjà versée lors de l'année N
@@ -59,6 +57,7 @@ class ChargesEntreprise {
     public function __get($property)
     {
         static $values = [];
+
         if (isset($values[$property])) return $values[$property];
         $accessor = $property;
         $value = method_exists($this, $accessor) ? $this->$accessor() : $this->$property;

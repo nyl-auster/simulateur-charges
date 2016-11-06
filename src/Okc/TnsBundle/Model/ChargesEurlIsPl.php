@@ -6,6 +6,8 @@ class ChargesEurlIsPl extends ChargesEntreprise
 
     public $salaire = 0;
 
+    public $tva = 0;
+
     //protected $totalCotisationsSocialesHorsCsg = 0;
 
     // données de syntheses des calculs :
@@ -21,7 +23,7 @@ class ChargesEurlIsPl extends ChargesEntreprise
      * Ma tva est toujours à 20%
      * @return int
      */
-    function getTVA()
+    function TVA()
     {
       return $this->caHt * 0.20;
     }
@@ -194,6 +196,11 @@ class ChargesEurlIsPl extends ChargesEntreprise
     function verdict()
     {
         return $this->benefices() - $this->chargesAprevoir();
+    }
+
+    function totalAProvisionner()
+    {
+      return $this->totalCotisationsSociales() + $this->cfe + $this->is()['total'] + $this->TVA;
     }
 
     function totalCharges()
