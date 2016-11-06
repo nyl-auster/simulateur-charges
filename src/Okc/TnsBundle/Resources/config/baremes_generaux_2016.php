@@ -1,6 +1,7 @@
 <?php
 
-$datas['pass'] = 37548;
+// le plafond de la sécurité sociale à l'année&
+$datas['pass'] = 38616;
 
 // TVA
 $datas['tva']['normal']['taux'] = 20;

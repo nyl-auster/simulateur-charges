@@ -1,6 +1,6 @@
 <?php
 /**
- * AJout date et organisme pour charges à prevoir
+ * Méthodes en commun pour le calcul de charges de tous types d'entreprise.
  */
 namespace Okc\TnsBundle\Model;
 
@@ -8,6 +8,8 @@ class ChargesEntreprise {
 
     // Chiffre d'affaire hors taxe
     public $caHt = 0;
+
+    public $tva = 0;
 
     // Cotisation foncière
     public $cfe = 0;

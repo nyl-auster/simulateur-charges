@@ -45,7 +45,7 @@ $datas['basesForfaitairesAnnee1'] = [
   'assuranceVieillesseBase' => 721,
 ];
 
-// en deuxieme années, les
+// en deuxieme années, les cotisations sont calculées sur des bases cotisationaire
 $datas['basesForfaitairesAnnee2'] = [
   'baseCalculCotisationsSociales' => round($datas['pass2015'] * 0.27),
   'assuranceVieillesseBase' => 1024,

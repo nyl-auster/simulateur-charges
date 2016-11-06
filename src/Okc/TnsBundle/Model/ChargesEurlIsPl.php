@@ -17,7 +17,14 @@ class ChargesEurlIsPl extends ChargesEntreprise
         return $this->salaire;
     }
 
-
+    /**
+     * Ma tva est toujours à 20%
+     * @return int
+     */
+    function getTVA()
+    {
+      return $this->caHt * 0.20;
+    }
 
     /**
      * Calcul de la base de calcul pour les cotisations sociales
