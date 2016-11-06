@@ -3,7 +3,6 @@
 namespace Okc\SiteBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use FOS\UserBundle\Form\Type\RegistrationFormType;
 
 class DefaultController extends Controller
 {

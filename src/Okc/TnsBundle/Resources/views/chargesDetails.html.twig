@@ -16,7 +16,7 @@
             <strong style="color:green">{{ (calculs.caHt - calculs.totalCharges) | euros }} </strong></h2>
     {% endif %}
 
-    <h3> Récapitulatif de vos charges <div style="float:right"> <a class="tiny button secondary radius" href="javascript:window.print()">Imprimer</a> </div></h3>
+    <h3> A provisionner <div style="float:right"> <a class="tiny button secondary radius" href="javascript:window.print()">Imprimer</a> </div></h3>
 
     <table>
         <thead>
@@ -30,15 +30,6 @@
         </tr>
         </thead>
         <tbody>
-
-        <tr>
-            <td>
-                Rémunération
-            </td>
-            <td>
-                {{ calculs.salaire | euros }}
-            </td>
-        </tr>
 
         <tr>
             <td>
@@ -62,15 +53,6 @@
             </td>
             <td>
                 {{ calculs.is.total | euros}}
-            </td>
-        </tr>
-
-        <tr>
-            <td>
-                Frais
-            </td>
-            <td>
-                {{  calculs.frais | euros }}
             </td>
         </tr>
 
