@@ -7,7 +7,7 @@
 // http://www.cnavpl.fr/les-chiffres-cles/principaux-parametres-du-regime-de-base/principaux-parametres-variables-du-regime-de-base/
 
 // import des paramètres globaux pour 2014
-$datas = include "baremes_generaux_2014.php";
+$datas = include "baremes_generaux_2016.php";
 
 // à quel organismes appartiennent quelle cotisation
 // Utile pour regrouper ensuite les cotisations par organismes

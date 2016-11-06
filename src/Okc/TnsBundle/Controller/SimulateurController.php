@@ -22,7 +22,8 @@ class SimulateurController extends Controller
      */
     public function simulateurAction(Request $request)
     {
-        $datas = include '../src/Okc/TnsBundle/Resources/config/baremesEurlIsPl2014.php';
+        //$datas = include '../src/Okc/TnsBundle/Resources/config/baremesEurlIsPl2014.php';
+        $datas = include '../src/Okc/TnsBundle/Resources/config/baremesEurlIsPl2016.php';
         $calculs = new ChargesEurlIsPl($datas);
         $form = $this->createForm(new ChargesType(), $calculs, ['method' => 'GET']);
         $form->handleRequest($request);

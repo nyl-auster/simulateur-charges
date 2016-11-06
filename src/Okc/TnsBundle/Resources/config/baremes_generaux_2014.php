@@ -1,12 +1,12 @@
 <?php
 
 $datas['pass'] = 37548;
-$datas['pass2013'] = 37032;
-$datas['pass2015'] = $datas['pass'];
+$datas['pass_annee_precedente'] = 37032;
+$datas['pass_annee_suivante'] = $datas['pass'];
 
 // TVA
-$datas['tva']['normal']['taux'] = 20;
-$datas['tva']['normal']['intermediaire'] = 10;
-$datas['tva']['normal']['reduit'] = 5.5;
+$datas['tva']['normale'] = 20;
+$datas['tva']['intermediaire'] = 10;
+$datas['tva']['reduite'] = 5.5;
 
 return $datas;
