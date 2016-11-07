@@ -225,22 +225,6 @@
     ''
     )}}
 
-
-    <tr>
-        <td>
-            Pourcentage cotisations par rapport à la rémunération :
-        </td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td>
-            {% if (calculs.salaire > 0) %}
-                {{ (calculs.totalCotisationsSociales * 100) / calculs.salaire  }}
-            {% endif %}
-        </td>
-    </tr>
-
-
     {{ macros.table_row(
     'Impot sur la société tranche 1',
     calculs.is.tranches.0.cotisation | euros,

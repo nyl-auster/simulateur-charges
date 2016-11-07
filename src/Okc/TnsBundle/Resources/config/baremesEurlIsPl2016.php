@@ -1,13 +1,20 @@
 <?php
 
-// http://www.urssaf.fr/images/ref_DEP07-DebActiv-2492_W.pdf
+// SOURCES :
+// https://www.urssaf.fr/portail/home/taux-et-baremes/taux-de-cotisations/les-professions-liberales/bases-de-calcul-et-taux-des-coti.html#FilAriane
 // http://www.rsi.fr/baremes/cotisations.html
 // http://service.cipav-retraite.fr/cipav/rubrique-104-montant-des-cotisations.htm
 // http://service.cipav-retraite.fr/cipav/article-11-votre-protection-sociale-99.htm
 // http://www.cnavpl.fr/les-chiffres-cles/principaux-parametres-du-regime-de-base/principaux-parametres-variables-du-regime-de-base/
 
-// import des paramètres globaux pour 2014
-$datas = include "baremes_generaux_2016.php";
+$datas['pass'] = 38616;
+$datas['pass_annee_precedente'] = 38040;
+$datas['pass_annee_suivante'] = $datas['pass'];
+
+// TVA
+$datas['tva']['normale'] = 20;
+$datas['tva']['intermediaire'] = 10;
+$datas['tva']['reduite'] = 5.5;
 
 // à quel organismes appartiennent quelle cotisation
 // Utile pour regrouper ensuite les cotisations par organismes
@@ -38,8 +45,8 @@ $datas['organismes'] = [
   ],
 ];
 
-// en premiere année, certaines cotisations
-// sont calculées sur des bases cotisationaires
+// en premiere année, certaines cotisations sont calculées sur des bases forfaitaires
+// https://www.urssaf.fr/portail/home/taux-et-baremes/taux-de-cotisations/les-professions-liberales/bases-de-calcul-forfaitaire-annu.html
 $datas['basesForfaitairesAnnee1'] = [
   'baseCalculCotisationsSociales' => round($datas['pass'] * 0.19),
   'assuranceVieillesseBase' => 721,
@@ -51,74 +58,103 @@ $datas['basesForfaitairesAnnee2'] = [
   'assuranceVieillesseBase' => 1024,
 ];
 
-// Formation professionnelle
-$datas['formationProfessionnelle'] = [
-  'label' => 'Formation Professionnelle',
+/**
+ * URSSAF
+ * https://www.urssaf.fr/portail/home/taux-et-baremes/taux-de-cotisations/les-professions-liberales/bases-de-calcul-et-taux-des-coti.html#FilAriane
+ */
+
+// [x] Maladie et maternité
+$datas['maladieMaternite'] = [
+  'organisme' => 'URSSAF',
+  'label' => 'Maladie Maternité',
+  'type' => 'tranche_exclusive',
   'tranches' => [
     [
-      'cotisation' => $datas['pass_annee_precedente'] * 0.0025,
+      'taux' => 6.50,
       'plafond' => PHP_INT_MAX,
-      'baseCalcul' => $datas['pass_annee_precedente'],
+    ]
+  ],
+];
+
+// [x] Allocation familiales
+$datas['allocationsFamiliales'] = [
+  'organisme' => 'URSSAF',
+  'label' => 'Allocations familiales',
+  'type' => "tranche_exclusive",
+  'description' => "Pour les revenus compris entre 42 478 € et 54 062 €, taux progressif : entre 2,15 % et 5,25 %",
+  'tranches' =>[
+    [
+      'taux' => 2.15,
+      'plafond' => 42478,
+    ],
+    // en fait, le taux est progressif entre 2,15 % et 5,25 %
+    // pour les revenus compris entre 42 478 € et 54 062 €. On tire l'estimation vers le haut.
+    [
+      'taux' => 5.25,
+      'plafond' => PHP_INT_MAX,
+    ],
+  ]
+];
+
+// [x] CSG-CRDS
+$datas['csgCrds'] = [
+  'organisme' => 'URSSAF',
+  'label' => 'Maladie Maternité',
+  'description' => "Totalité du revenu de l’activité non salariée + cotisations sociales obligatoires",
+  'type' => 'tranche_exclusive',
+  'tranches' => [
+    [
+      'taux' => 8,
+      'plafond' => PHP_INT_MAX,
+    ]
+  ],
+];
+
+// Formation professionnelle : le PASS * 0.25%. Tout bêtement.
+$datas['formationProfessionnelle'] = [
+  'organisme' => 'URSSAF',
+  'label' => 'Formation Professionnelle',
+  'type' => 'tranche_exclusive',
+  'description' => 'Sur la base de ' . $datas['pass'],
+  'tranches' => [
+    [
+      'cotisation' => $datas['pass'] * 0.0025,
+      'plafond' => PHP_INT_MAX,
+      'baseCalcul' => $datas['pass'],
       'taux' => 0.25,
     ],
   ],
-  'description' => "0,25 % du pass 2013 soit 94 euros",
 ];
 
-// Allocation familiales
-$datas['allocationsFamiliales'] = [
-  'label' => 'Allocations familiales',
-  'tranches' =>
+// Retraite de base CNAVPL
+// http://service.cipav-retraite.fr/cipav/article-33-recapitulatif-des-options-de-cotisation-104.htm
+$datas['assuranceVieillesseBase'] = [
+  'label' => 'Retraite de base',
+  'description' => "Retraite de base CNAVPL",
+  'revenusNonConnus' => 3324 + 6137,
+  'forfait' => [
+    'plafond' => 9171,
+    'total' => 190,
+  ],
+  'tranches' => [
+    // sous 4441, cotisation forfaitaire
     [
-      [
-        'taux' => 5.25,
-        'plafond' => PHP_INT_MAX,
-      ]
+      'plafond' =>  4441,
+      'cotisation' => 448,
     ],
-];
-
-// Maladie et maternité
-$datas['maladieMaternite'] = [
-  'label' => 'Maladie Maternité',
-  'tranches' => [
     [
-      'taux' => 6.5,
-      'plafond' => PHP_INT_MAX,
-    ]
+      'plafond' =>  $datas['pass'],
+      'taux' => 8.23,
+    ],
+    [
+      'plafond' => 193080,
+      'taux' => 1.87
+    ],
   ],
 ];
 
-// Crds = 0,5
-// Csg déductible = 5,1
-// Csg non déductible = 2,4
-$datas['csgDeductible'] = [
-  'label' => 'CSG Déductible',
-  'tranches' => [
-    [
-      'taux' => 5.1,
-      'plafond' => PHP_INT_MAX,
-    ]
-  ],
-];
-$datas['csgNonDeductible'] = [
-  'label' => 'CSG Non Déductible',
-  'tranches' => [
-    [
-      'taux' => 2.4,
-      'plafond' => PHP_INT_MAX,
-    ]
-  ],
-];
 
-$datas['crds'] = [
-  'label' => 'CRDS',
-  'tranches' => [
-    [
-      'taux' => 0.5,
-      'plafond' => PHP_INT_MAX,
-    ]
-  ],
-];
+// =============
 
 $datas['prevoyance'] = [
   'description' => "76, 228, ou 380 euros suivant la classe choisie",
@@ -138,33 +174,12 @@ $datas['is'] = [
   ]
 ];
 
-// Assurance vieillesse de base
-// http://service.cipav-retraite.fr/cipav/article-33-recapitulatif-des-options-de-cotisation-104.htm
-$datas['assuranceVieillesseBase'] = [
-  'label' => 'Retraite de base',
-  'revenusNonConnus' => 3324 + 6137,
-  'forfait' => [
-    'plafond' => 9171,
-    'total' => 190,
-  ],
-  'tranches' => [
-    [
-      //'plafond' => round($datas['pass'] * 0.85),
-      'plafond' => 31916,
-      'taux' => 10.1,
-    ],
-    [
-      //'plafond' => round($datas['pass'] * 5),
-      'plafond' => 187740,
-      'taux' => 1.87
-    ],
-  ],
-];
 
 // Assurance vieillesse complémentaire (obligatoire)
 // http://service.cipav-retraite.fr/cipav/article-33-recapitulatif-des-options-de-cotisation-104.htm
 $datas['assuranceVieillesseComplementaire'] = [
   'label' => 'Retraite complémentaire',
+  'type' => "tranche_exclusive",
   'tranches' => [
     [
       'nom' => 'A',
@@ -239,6 +254,7 @@ $datas['invaliditeDeces'] = [
 // Réduction assurance vieillesse complémentaire
 $datas['assurance_vieillesse_complementaire_reduction'] = [
   'label' => 'Réduction assurance vieillesse complémentaire',
+  'type' => "tranche_exclusive",
   'tranches' => [
     [
       'plafond' => 5632,

@@ -65,7 +65,15 @@ class ChargesEntreprise {
         return $value;
     }
 
-    function calculTranchesParForfait($datas, $somme)
+  /**
+   * Calcul de tranche par 'forfait' de type : si tu gagnes entre 10 000 et 20 000,
+   * tu pais 3000 euros. On cherche donc à quelle tranche on appartient et on retourne
+   * le montant forfaitaire qui correspond.
+   * @param $datas
+   * @param $somme
+   * @return mixed
+   */
+  function calculTranchesParForfait($datas, $somme)
     {
         $cotisation = 0;
         $id_tranche = 0;
@@ -85,6 +93,9 @@ class ChargesEntreprise {
     /**
      * Methode générique pour calculer le montant d'un impot / d'une cotisation
      * en fonction d'un bareme de tranche avec pourcentage
+     *
+     * Les cotisations calculées pour chaque tranche s'additionnent les unes aux autres.
+     *
      * @param array $datas
      * @param float $somme
      * @return array

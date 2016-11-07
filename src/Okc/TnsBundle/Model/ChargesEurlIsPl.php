@@ -70,7 +70,8 @@ class ChargesEurlIsPl extends ChargesEntreprise
      */
     function allocationsFamiliales()
     {
-        return $this->calculTranchesParTaux($this->datas['allocationsFamiliales'], $this->baseCalculCotisationsSociales());
+        $datas = $this->calculTranchesParTaux($this->datas['allocationsFamiliales'], $this->baseCalculCotisationsSociales());
+        return $datas;
     }
 
     /**
