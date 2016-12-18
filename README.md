@@ -2,8 +2,8 @@ CALCULETTE TNS
 ========================
 
 **DEPRECATED : ce projet n'est plus maintenu, tout a été réecrit en angular JS sur une nouvelle version :
-https://github.com/nyl-auster/eurl-calculator
-**
+https://github.com/nyl-auster/eurl-calculator**
+
 
 Calcule les charges d'un travailleur non salarié en profession libérale pour une EURL à l'impot sur la société.
 Basée sur symfony 2
